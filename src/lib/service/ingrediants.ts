@@ -11,11 +11,11 @@ let unsubscribe;
 export const ingrediants = derived(user, ($user, set) => {
     if ($user) {
         ingredientsRef = db.collection('zutaten');
-        unsubscribe = ingredientsRef.orderBy('name').onSnapshot(snapshot => {
-            const ingredients = snapshot.docs.map(doc => doc.data());
-            console.log(ingredients);
+        unsubscribe = ingredientsRef.orderBy('name').onSnapshot(async (snapshot) => {
+            const ingredientPromises = snapshot.docs.map(doc => doc.data());
+            const ingrediants = await Promise.all(ingredientPromises);
             set(ingrediants);
-        })
+        });
     } else {
         unsubscribe?.();
         set(null);
