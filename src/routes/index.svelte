@@ -1,24 +1,11 @@
 <script lang="ts">
-	import {login, logout, user} from '$lib/service/auth';
-	import {ingrediants} from '$lib/service/ingrediants';
-
-	$: auth = $user ? logout : login;
+	import {recipes} from '$lib/service/recipes';
 </script>
 
-<main>
-	<button on:click={auth}>{$user ? 'Logout' : 'Login'}</button>
+<svelte:head>
+	<title>Rezepte</title>
+</svelte:head>
 
-	<pre>{JSON.stringify($ingrediants, null, 2)}</pre>
-</main>
+<h1>Rezepte</h1>
 
-<style>
-	:root {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-			'Open Sans', 'Helvetica Neue', sans-serif;
-	}
-
-	main {
-		padding: 1em;
-		margin: 0 auto;
-	}
-</style>
+<pre>{JSON.stringify($recipes, null, 2)}</pre>

@@ -12,8 +12,8 @@ export const ingrediants = derived(user, ($user, set) => {
     if ($user) {
         ingredientsRef = db.collection('zutaten');
         unsubscribe = ingredientsRef.orderBy('name').onSnapshot(async (snapshot) => {
-            const ingredientPromises = snapshot.docs.map(doc => doc.data());
-            const ingrediants = await Promise.all(ingredientPromises);
+            const ingredientPromises = snapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
+            const ingrediants: IIngrediant[] = await Promise.all(ingredientPromises);
             set(ingrediants);
         });
     } else {
