@@ -1,5 +1,9 @@
 <script lang="ts">
 	import {recipes} from '$lib/service/recipes';
+	import Recipe from '$lib/component/Recipe.svelte'
+
+	$: console.log($recipes);
+	
 </script>
 
 <svelte:head>
@@ -8,4 +12,18 @@
 
 <h1>Rezepte</h1>
 
-<pre>{JSON.stringify($recipes, null, 2)}</pre>
+{#if $recipes}
+    {#each $recipes as recipe}
+        <Recipe {recipe} />
+    {/each}
+{/if}
+
+<!-- <Recipe
+    ingrediant={emptyIngrediant}
+    editMode={true}
+    let:getIngrediant
+    let:clear>
+    <AddIngrediant
+        {getIngrediant}
+        {clear} />
+</Recipe> -->

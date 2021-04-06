@@ -37,15 +37,18 @@
 
 <style>
     nav {
-        border-top: 10px solid #0c3d87;
-        background: linear-gradient(rgba(255, 62, 0, 0.1), #fff 80%);
+        border-bottom: 10px solid #0c3d87;
+        background: #fff;
         font-weight: 300;
-        padding: 0 1em;
         display: flex;
         justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        box-shadow: 0 0 10px #ccc;
     }
     ul {
-        margin: 0;
+        margin: 0 1em;
         padding: 0;
     }
 
@@ -70,13 +73,12 @@
         position: absolute;
         content: "";
         width: 100%;
-        height: 5px;
+        height: 10px;
         background-color: #0c3d87;
         display: block;
-        top: -1px;
+        bottom: -5px;
         left: 0;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
+        border-radius: 5px;
     }
 
     li a {
@@ -94,5 +96,6 @@
     button {
         border: 0;
         background: none;
+        padding: 0 1em;
     }
 </style>

@@ -29,6 +29,7 @@ declare interface IRecipe {
     name: string;
     zutaten: IIngrediantApi[];
     gesamtgewicht: number;
+    ref?: DocumentReference<T>;
 }
 declare interface IRecipeMapped extends IRecipe {
     zutaten: IIngrediantRecipe[];

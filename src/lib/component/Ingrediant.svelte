@@ -1,6 +1,7 @@
 <script lang="ts">
     import { ingrediantUpdate, emptyIngrediant } from '$lib/service/ingrediants'
     import { afterUpdate } from 'svelte';
+    import Card from '$lib/component/Card.svelte';
 
     export let ingrediant: IIngrediant;
     export let editMode: boolean = false;
@@ -78,7 +79,7 @@
     });
 </script>
 
-<section class:editMode>
+<Card {editMode}>
     <div>
         <label for="{id}-name">Name</label>
         <input id="{id}-name" type="text" bind:value={name} disabled={!editMode}>
@@ -117,28 +118,9 @@
             {editMode ? '✔' : '🖊'}
         </button>
     </slot>
-</section>
+</Card>
 
 <style>
-    section {
-        display: flex;
-        flex-direction: column;
-        padding: 2em;
-        border: 1px solid #ccc;
-        box-shadow: 0 5px 10px #eee;
-        margin-top: 1em;
-        --buttonColor: #cc0e2e;
-    }
-
-    .editMode {
-        --buttonColor: #34b30e;
-    }
-
-    section:not(.editMode) input {
-        border-color: transparent;
-        background: none;
-    }
-
     div {
         display: flex;
         justify-content: space-between;

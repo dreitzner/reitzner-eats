@@ -7,7 +7,6 @@
 
     const add = async() => {
         const success = await ingrediantAdd(getIngrediant());
-        console.log(success);
         if(!success) return;
         clear();
     };
