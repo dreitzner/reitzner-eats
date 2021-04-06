@@ -3,7 +3,7 @@
 /// <reference types="vite/client" />
 
 declare interface IIngrediant {
-    id: string;
+    id?: string;
     name: string;
     kohlenhydrate: number;
     zucker: number;
@@ -12,6 +12,7 @@ declare interface IIngrediant {
     balaststoffe: number;
     kcal: number;
     gesFett: number;
+    ref?: DocumentReference<T>;
 }
 
 declare interface IIngrediantApi {

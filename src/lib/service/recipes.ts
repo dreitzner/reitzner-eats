@@ -16,7 +16,18 @@ export const recipes = derived([user, ingrediants], ([$user, $ingrediants], set)
             const recipePromises = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
             const recipes: IRecipe[] = await Promise.all(recipePromises);
             const recipesMapped: IRecipeMapped[] = recipes.map(r => {
-                const zutaten: IIngrediantRecipe[] = r.zutaten.map(z => ({...$ingrediants.find(i => i.id === z._id), amount: z.amount}));
+                const zutaten: IIngrediantRecipe[] = r.zutaten
+                    .map(z => {
+                        const ingrediant = $ingrediants?.find(i => i.id === z._id);
+                        if (ingrediant === null) return ingrediant;
+                        ingrediant.ref = null;
+
+                        return {
+                            ...ingrediant,
+                            amount: z.amount,
+                        }
+                    })
+                    .filter(i => i);
                 return {
                     id: r.id,
                     name: r.name,
