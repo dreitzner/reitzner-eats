@@ -19,7 +19,7 @@
         kcal,
         gesFett,
         ref,
-    } = ingrediant;
+    } = ingrediant || {};
 
     afterUpdate(() => {
         if (editMode) return;

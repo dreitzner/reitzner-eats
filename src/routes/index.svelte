@@ -2,7 +2,7 @@
 	import {recipes} from '$lib/service/recipes';
 	import Recipe from '$lib/component/Recipe.svelte'
 
-	$: console.log($recipes);
+
 	
 </script>
 

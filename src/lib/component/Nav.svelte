@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from '$app/stores';
-	import {login, logout, user} from '$lib/service/auth';
+	import {login, logout, user} from '$lib/service/firebase';
 
 	$: auth = $user ? logout : login;
 
