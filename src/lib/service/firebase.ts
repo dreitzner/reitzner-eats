@@ -1,7 +1,7 @@
 import { readable } from 'svelte/store'
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
+import firebase from "firebase/app/dist/index.esm";
+import "firebase/auth/dist/index.esm";
+import "firebase/firestore/dist/index.esm";
 
 import { browser } from '$app/env';
 
