@@ -24,9 +24,7 @@
 	"engines": {
 		"node": ">= 14.16.0"
 	},
-	"dependencies": {
-		"firebase": "8.x.x"
-	},
+	"dependencies": {},
 	"volta": {
 		"node": "14.16.0"
 	}

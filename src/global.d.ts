@@ -34,3 +34,9 @@ declare interface IRecipe {
 declare interface IRecipeMapped extends IRecipe {
     zutaten: IIngrediantRecipe[];
 }
+
+declare namespace firebase {
+    function initializeApp(firebaseConfig:object): any;
+    let auth: any;
+    function firestore(): any
+}
