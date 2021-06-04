@@ -3,7 +3,8 @@
 </script>
 
 <section class:editMode>
-    <slot></slot>
+    <slot name="form"></slot>
+    <slot name="button"></slot>
 </section>
 
 <style>

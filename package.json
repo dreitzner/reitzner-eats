@@ -1,28 +1,31 @@
 {
 	"name": "reitzner-eats",
 	"version": "0.0.1",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dreitzner/reitzner-eats"
+	},
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"start": "svelte-kit start"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-node": "^1.0.0-next.17",
-		"@sveltejs/adapter-static": "^1.0.0-next.7",
-		"@sveltejs/kit": "^1.0.0-next.93",
-		"svelte": "^3.37.0",
-		"svelte-preprocess": "^4.7.2",
+		"@sveltejs/adapter-static": "^1.0.0-next.13",
+		"@sveltejs/kit": "^1.0.0-next.113",
+		"svelte": "^3.38.2",
+		"svelte-preprocess": "^4.7.3",
 		"tslib": "^2.2.0",
-		"typescript": "^4.2.4",
-		"vite": "^2.2.3"
+		"typescript": "^4.3.2",
+		"vite": "^2.3.6"
 	},
 	"type": "module",
 	"engines": {
 		"node": ">= 14.16.0"
 	},
 	"dependencies": {
-		"@firebase/util": "^0.4.1",
-		"firebase": "^9.0.0-beta.1"
+		"firebase": "8.x.x"
 	},
 	"volta": {
 		"node": "14.16.0"

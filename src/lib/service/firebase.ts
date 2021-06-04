@@ -1,6 +1,8 @@
 import { readable } from 'svelte/store'
-import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+
 import { browser } from '$app/env';
 
 const firebaseConfig = {
@@ -12,16 +14,19 @@ const firebaseConfig = {
     appId: "1:21519801772:web:42fec5da3d956074abae09",
     measurementId: "G-ENR9W6QJDT"
 };
-let auth;
+
 let googleProvider;
 let _user = null;
+let _db = null;
 
 if (browser) {
-    initializeApp(firebaseConfig);
-    auth = getAuth();
-    googleProvider = new GoogleAuthProvider();
-    _user = readable(null, set => onAuthStateChanged(auth, (user) => set(user)));
+    firebase.initializeApp(firebaseConfig);
+    googleProvider = new firebase.auth.GoogleAuthProvider();
+    _user = readable(null, set => firebase.auth().onAuthStateChanged((user) => set(user)));
+    _db = firebase.firestore();
 }
+
 export const user = _user;
-export const login = () => signInWithPopup(auth, googleProvider);
-export const logout = () => signOut(auth);
+export const db = _db;
+export const login = () => firebase.auth().signInWithPopup(googleProvider);
+export const logout = () => firebase.auth().signOut();

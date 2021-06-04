@@ -20,19 +20,29 @@
     <!-- icon here -->
 
     <ul>
-        {#each navItems as {route, name}}
-            <li>
-                <a
-                    href={route}
-                    aria-current={route === $page.path ? 'page' : undefined}>
-                    {name}
-                </a>
-            </li>
-        {/each}
+        {#if $user}
+            {#each navItems as {route, name}}
+                <li>
+                    <a
+                        href={route}
+                        aria-current={route === $page.path ? 'page' : undefined}>
+                        {name}
+                    </a>
+                </li>
+            {/each}
+        {/if}
     </ul>
 
     
-	<button on:click={auth}>{$user ? 'Logout' : 'Login'}</button>
+	<button on:click={auth}>
+        {#if $user}
+            <img src="{$user.photoURL}" alt="logout">
+        {:else}
+        <span class="material-icons-outlined">
+            account_circle
+        </span>
+        {/if}
+    </button>
 </nav>
 
 <style>
@@ -40,8 +50,8 @@
         border-bottom: 10px solid #0c3d87;
         background: #fff;
         font-weight: 300;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         position: fixed;
         bottom: 0;
         width: 100vw;
@@ -97,5 +107,11 @@
         border: 0;
         background: none;
         padding: 0 1em;
+        justify-self: end;
+    }
+
+    img {
+        height: 24px;
+        border-radius: 50%;
     }
 </style>

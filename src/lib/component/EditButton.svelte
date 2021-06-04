@@ -1,15 +1,23 @@
 <script lang="ts">
-    export let add: Function;
+    export let clickHandler;
+    export let disabled: boolean = false;
+    export let editMode: boolean = false;
 </script>
-<button on:click={() => add()} >
+
+<button on:click={clickHandler} disabled={disabled}>
+    {#if editMode}
     <span class="material-icons-outlined">
-        add
+        done
     </span>
+    {:else}
+    <span class="material-icons-outlined">
+        edit
+    </span>
+    {/if}
 </button>
 
 <style>
     button {
-        --buttonColor: #cc0e2e;
         position: relative;
         align-self: flex-end;
         background: var(--buttonColor);
@@ -39,5 +47,9 @@
     button:active::before,
     button:focus::before {
         transform: scale(1);
+    }
+
+    button:disabled {
+        --buttonColor: #ccc;
     }
 </style>

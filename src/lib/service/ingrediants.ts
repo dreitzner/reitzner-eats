@@ -1,14 +1,7 @@
 import type { Readable } from 'svelte/types/runtime/store';
 
 import { derived } from 'svelte/store'
-import {user} from '$lib/service/firebase';
-import { getFirestore, collection, updateDoc, addDoc, onSnapshot, query, orderBy } from "firebase/firestore"; 
-import { browser } from '$app/env';
-
-let db = null;
-if (browser) {
-    db = getFirestore();
-}
+import {user, db} from '$lib/service/firebase';
 
 let ingredientsRef;
 let unsubscribe;
@@ -38,7 +31,7 @@ export const ingrediantUpdate = async (ingrediant: IIngrediant): Promise<boolean
     if (!ingredientsRef) return;
     try {
         const { ref } = ingrediant;
-        await updateDoc(ref, cleanIngrediant(ingrediant))
+        await ref.set(cleanIngrediant(ingrediant))
         return true;
     } catch (error) {
         console.error(error);
@@ -48,7 +41,7 @@ export const ingrediantUpdate = async (ingrediant: IIngrediant): Promise<boolean
 export const ingrediantAdd = async (ingrediant: IIngrediant): Promise<boolean> => {
     if (!ingredientsRef) return;
     try {
-        await addDoc(ingredientsRef, cleanIngrediant(ingrediant));
+        await ingredientsRef.add(cleanIngrediant(ingrediant));
         return true;
     } catch (error) {
         console.error(error);
@@ -58,9 +51,9 @@ export const ingrediantAdd = async (ingrediant: IIngrediant): Promise<boolean> =
 
 export const ingrediants: Readable<IIngrediant[]> = derived(user, ($user, set) => {
     if ($user) {
-        ingredientsRef = collection(db, 'zutaten');
-        const qRef = query(ingredientsRef, orderBy('name'));
-        unsubscribe = onSnapshot(qRef, async (snapshot) => {
+        ingredientsRef = db.collection('zutaten')
+        unsubscribe = ingredientsRef.orderBy('name')
+            .onSnapshot(async (snapshot) => {
             const ingrediants = snapshot.docs.map(doc => (Object.assign(doc.data() || {}, {id: doc.id, ref: doc.ref})));
             // const ingrediants: IIngrediant[] = await Promise.all(ingredientPromises);
             set(ingrediants);

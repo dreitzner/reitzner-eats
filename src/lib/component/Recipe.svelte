@@ -2,6 +2,7 @@
     import { recipeUpdate, emptyRecipe } from '$lib/service/recipes'
     import { afterUpdate } from 'svelte';
     import Card from '$lib/component/Card.svelte';
+    import EditButton from './EditButton.svelte';
 
     export let recipe: IRecipeMapped;
     export let editMode: boolean = false;
@@ -31,7 +32,7 @@
         } = recipe);
     }
 
-    const changeEditMode = async () => {
+    const clickHandler = async () => {
         if (!editMode) return (editMode = !editMode);
 
         writeInProgress = true;
@@ -60,21 +61,21 @@
 </script>
 
 <Card {editMode}>
-    <div>
-        <label for="{id}-name">Name</label>
-        <input id="{id}-name" type="text" bind:value={name} disabled={!editMode}>
-    </div>
-    <div>
-        <label for="{id}-weight">Gesamtgewicht</label>
-        <input id="{id}-weight" type="number" bind:value={gesamtgewicht} disabled={!editMode}>
-    </div>
+    <svelte:fragment slot="form">
+        <div>
+            <label for="{id}-name">Name</label>
+            <input id="{id}-name" type="text" bind:value={name} disabled={!editMode}>
+        </div>
+        <div>
+            <label for="{id}-weight">Gesamtgewicht</label>
+            <input id="{id}-weight" type="number" bind:value={gesamtgewicht} disabled={!editMode}>
+        </div>
+    </svelte:fragment>
 
     <!-- zutaten -->
 
-    <slot {getRecipe} {clear}>
-        <button on:click={changeEditMode} disabled={writeInProgress}>
-            {editMode ? '✔' : '🖊'}
-        </button>
+    <slot {getRecipe} {clear} slot="button">
+        <EditButton {clickHandler} disabled={writeInProgress} {editMode} />
     </slot>
 </Card>
 
