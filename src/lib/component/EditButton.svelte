@@ -4,7 +4,7 @@
     export let editMode: boolean = false;
 </script>
 
-<button on:click={clickHandler} disabled={disabled}>
+<button on:click|preventDefault={clickHandler} disabled={disabled}>
     {#if editMode}
     <span class="material-icons-outlined">
         done

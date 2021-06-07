@@ -1,7 +1,7 @@
 <script lang="ts">
     export let add: Function;
 </script>
-<button on:click={() => add()} >
+<button on:click|preventDefault={() => add()} >
     <span class="material-icons-outlined">
         add
     </span>

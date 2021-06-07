@@ -2,7 +2,7 @@
     export let editMode: boolean;
 </script>
 
-<section class:editMode>
+<section class:editMode on:click>
     <slot name="form"></slot>
     <slot name="button"></slot>
 </section>

@@ -15,13 +15,25 @@ export const emptyRecipe: IRecipeMapped = {
     ref: null,
 };
 
-const cleanRecipe = (recipe: IRecipeMapped): IRecipeMapped => {
-    const recipeToClean = {...recipe};
-    delete recipeToClean.id;
-    delete recipeToClean.ref;
+const cleanRecipe = (recipe: IRecipeMapped): IRecipe => {
+    const {
+        id,
+        name,
+        gesamtgewicht,
+    } = recipe;
 
-    // TODO: unmap zutaten and change type
-    return recipeToClean;
+    const zutaten: IIngrediantApi[] = recipe.zutaten.map(zutat => {
+        return {
+            _id: zutat.id,
+            amount: zutat.amount,
+        };
+    });
+    return {
+        id,
+        name,
+        zutaten,
+        gesamtgewicht,
+    };
 }
 
 export const recipeUpdate = async (recipe: IRecipeMapped): Promise<boolean> => {

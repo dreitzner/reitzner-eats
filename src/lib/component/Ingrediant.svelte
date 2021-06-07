@@ -4,6 +4,7 @@
         emptyIngrediant,
     } from "$lib/service/ingrediants";
     import { afterUpdate } from "svelte";
+    import { fade } from "svelte/transition";
     import Card from "$lib/component/Card.svelte";
     import EditButton from "./EditButton.svelte";
 
@@ -85,78 +86,75 @@
 
 <Card {editMode}>
     <svelte:fragment slot="form">
-        <div>
-            <label for="{id}-name">Name</label>
-            <input
-                id="{id}-name"
-                type="text"
-                bind:value={name}
-                disabled={!editMode}
-            />
-        </div>
-        <div>
-            <label for="{id}-kcal">kcal</label>
-            <input
-                id="{id}-kcal"
-                type="number"
-                bind:value={kcal}
-                disabled={!editMode}
-            />
-        </div>
-        <div>
-            <label for="{id}-fett">Fett</label>
-            <input
-                id="{id}-fett"
-                type="number"
-                bind:value={fett}
-                disabled={!editMode}
-            />
-        </div>
-        <div>
-            <label for="{id}-gesFett">gesättigte Fettsäuren</label>
-            <input
-                id="{id}-gesFett"
-                type="number"
-                bind:value={gesFett}
-                disabled={!editMode}
-            />
-        </div>
-        <div>
-            <label for="{id}-carb">Kohlenhydrate</label>
-            <input
-                id="{id}-carb"
-                type="number"
-                bind:value={kohlenhydrate}
-                disabled={!editMode}
-            />
-        </div>
-        <div>
-            <label for="{id}-sugar">Zucker</label>
-            <input
-                id="{id}-sugar"
-                type="number"
-                bind:value={zucker}
-                disabled={!editMode}
-            />
-        </div>
-        <div>
-            <label for="{id}-protein">Eiweiß</label>
-            <input
-                id="{id}-protein"
-                type="number"
-                bind:value={eiweiß}
-                disabled={!editMode}
-            />
-        </div>
-        <div>
-            <label for="{id}-fiber">Balaststoffe</label>
-            <input
-                id="{id}-fiber"
-                type="number"
-                bind:value={balaststoffe}
-                disabled={!editMode}
-            />
-        </div>
+        <h2>{name}</h2>
+        {#if editMode}
+            <section transition:fade>
+                <div>
+                    <label for="{id}-name">Name</label>
+                    <input
+                        id="{id}-name"
+                        type="text"
+                        bind:value={name}
+                    />
+                </div>
+                <div>
+                    <label for="{id}-kcal">kcal</label>
+                    <input
+                        id="{id}-kcal"
+                        type="number"
+                        bind:value={kcal}
+                    />
+                </div>
+                <div>
+                    <label for="{id}-fett">Fett</label>
+                    <input
+                        id="{id}-fett"
+                        type="number"
+                        bind:value={fett}
+                    />
+                </div>
+                <div>
+                    <label for="{id}-gesFett">gesättigte Fettsäuren</label>
+                    <input
+                        id="{id}-gesFett"
+                        type="number"
+                        bind:value={gesFett}
+                    />
+                </div>
+                <div>
+                    <label for="{id}-carb">Kohlenhydrate</label>
+                    <input
+                        id="{id}-carb"
+                        type="number"
+                        bind:value={kohlenhydrate}
+                    />
+                </div>
+                <div>
+                    <label for="{id}-sugar">Zucker</label>
+                    <input
+                        id="{id}-sugar"
+                        type="number"
+                        bind:value={zucker}
+                    />
+                </div>
+                <div>
+                    <label for="{id}-protein">Eiweiß</label>
+                    <input
+                        id="{id}-protein"
+                        type="number"
+                        bind:value={eiweiß}
+                    />
+                </div>
+                <div>
+                    <label for="{id}-fiber">Balaststoffe</label>
+                    <input
+                        id="{id}-fiber"
+                        type="number"
+                        bind:value={balaststoffe}
+                    />
+                </div>
+            </section>
+        {/if}
     </svelte:fragment>
 
     <slot {getIngrediant} {clear} slot="button">
